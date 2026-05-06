@@ -53,4 +53,6 @@ export const studentsImage = [
     '/images/1L2A1469.webp',
     '/images/1L2A1643.webp',
     '/images/1L2A1709.webp',
+    '/images/1L2A1635.webp',
+    '/images/1L2A1645.webp',
 ];

@@ -220,7 +220,7 @@ export default function Home() {
               className={classNames('students__figure',
                 {
                   even: index % 2 === 0,
-                  lasts: studentsImage.length - 1 === index || studentsImage.length - 2 === index
+                  lasts: studentsImage.length - 1 === index || studentsImage.length - 2 === index || studentsImage.length - 3 === index || studentsImage.length - 4 === index
                 }
               )}
             >
