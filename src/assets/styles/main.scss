@@ -1,0 +1,8 @@
+@use './fonts/fonts';
+@use './base/base';
+@use './pages/pages';
+@use './components/compontents';
+
+*:disabled {
+    cursor: not-allowed !important;
+}

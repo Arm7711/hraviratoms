@@ -1,0 +1,35 @@
+import { defineConfig } from 'vite';
+import react from
+  '@vitejs/plugin-react';
+import svgr from 'vite-plugin-svgr';
+// import { VitePWA } from 'vite-plugin-pwa';
+
+export default defineConfig({
+  plugins: [react(), svgr({
+    server: {
+    allowedHosts: 'all'
+  },
+    exportAsDefault: true,
+    svgo: true,
+    svgoConfig: {
+      plugins: [{
+        removeViewBox: false
+      }],
+    },
+  }),
+
+  ],
+  css: {
+    devSourcemap: true,
+  },
+  server: {
+    host: '0.0.0.0',
+    port: 3000,
+    open: true,
+    allowedHosts: [
+      'localhost',
+      '127.0.0.1',
+      'corporation-ceo-lounge-stereo.trycloudflare.com',
+    ],
+  },
+});
