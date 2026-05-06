@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import classNames from 'classnames';
-import Section from '../../components/section/Section';
+import Section from '../../components/Section/Section';
 import ArrowSvg from '../../components/svg/ArrowSvg';
 import lastBels from '../../assets/images/site-images/verjin-zang-1.png'
 import ScratchCard from '../../components/ScratchCard/ScratchCard';
