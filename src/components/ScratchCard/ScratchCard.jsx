@@ -45,9 +45,9 @@ export default function ScratchCard() {
                 onLoad={() => setLoaded(true)}
             />
 
-            <p className='date'>23.05.26</p>
+            {loaded && <p className='date'>23.05.26</p>}
 
-            <img className='arrow' src={arrowGif} alt="gif" />
+            {loaded && <img className='arrow' src={arrowGif} alt="gif" />}
         </div>
     )
 }

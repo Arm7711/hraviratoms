@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=MonteCarlo&display=swap');
+
 .iframe__wrapper {
     width: 100%;
     max-width: 350px;
@@ -11,11 +13,23 @@
 
     .date {
         position: absolute;
-        font-size: 30px;
+        font-size: 40px;
+        font-weight: 500;
+        font-family: "MonteCarlo", cursive;
         font-style: italic;
-        left: 50%;
-        transform: translateX(-50%) translateY(100px);
+        left: calc(50% - 12px);
+        transform: translateX(-50%) translateY(90px);
         z-index: 0;
+        animation: animText 0.4s;
+
+        @keyframes animText {
+            from{
+                filter: blur(15px);
+            }
+            to{
+                filter: blur(0px);
+            }
+        }
     }
 
     .arrow {

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router';
-import { motion } from 'framer-motion';
+import { motion, spring } from 'framer-motion';
 import classNames from 'classnames';
+
 import Section from '../../components/Section/Section';
 import ArrowSvg from '../../components/svg/ArrowSvg';
 import lastBels from '../../assets/images/site-images/verjin-zang-1.png'
@@ -33,62 +34,7 @@ import { sendToTelegram } from '../../utils/sendToTelegram';
 import TelegramSvg from '../../assets/images/site-images/telegram-icon.svg?react';
 import InstagramSvg from '../../assets/images/site-images/instagram.svg?react';
 
-const textData = [
-  'Մեր հուշերի մեղեդին',
-  'Բարի գալուստ մեր թվային օրագիր՝ մեր վերջին զանգի պատմություն»',
-  ` 12 տարի միասին անցած
-    ճանապարհ, լի հիշողություններով,
-    ծիծաղով և երբեմն՝
-    դժվարություններով:
-`,
-  `
-    Մենք պարզապես դասարան չէինք,
-    Մենք ընտանիք էինք...`,
-
-  'մաթեմատիկայի ուսուցչուհի',
-
-  `Սիրելի՛ դասղեկ,
-Դուք միայն ուսուցիչ չեք, այլ նաև մեր ուղեկիցը, խորհրդատուն ու ոգեշնչման աղբյուրը։ Ձեր հոգատարությունն ու համբերությունը մեզ ուժ են տալիս առաջ գնալու, հաղթահարելու դժվարությունները և հավատալու մեր հնարավորություններին։ Դուք մեզ սովորեցրել եք ոչ միայն գիտելիք, այլ նաև մարդ լինել, գնահատել բարին ու ճիշտը։`,
-
-  /* `Իսկ Դու′ք, մեր բարի, մեր լավ ուսուցիչ.
-
-Դուք բաժին ունեք մեր կյանքի գարնան
-ծաղիկների մեջ,
-
-Դուք բաժին ունեք մեր մանուկ սրտի վաղ
-լուսաբացի ծաղիկների մեջ,
-
-Մեր. գիտցածի մեջ, ունեցածի մեջ:`, */
-
-  `Մեր ճանապարհի ամենակարևոր ուղեկիցներից
-մեկը մեր դասղեկն էր։
-
-Տասներկու տարվա ընթացքում նա դարձավ մեր
-վստահելի ուղեցույցը և մեր պատմության
-անբաժանելի մասն ու մեր ընկերը...`,
-
-  `Մեր ուսուցիչները եղել են այն մարդիկ, ովքեր մեզ
-տվել են ոչ միայն գիտելիքներ, այլ նաև
-մարդկային կարևոր արժեքներ։`,
-
-  `Յուրաքանչյուր դաս դարձավ մի փոքրիկ կյանքի
-դաս, որը մեզ պատրաստեց դեպի ապագա՝
-դեպի հասուն կյանք։`,
-
-  ` Մենք շնորհակալ ենք յուրաքանչյուր ուսուցչի՝
-իրենց համբերության, անսահման նվիրման և
-ոգեշնչման համար։`
-];
-
-const studentsImage = [
-  '/images/1L2A1365.webp',
-  '/images/1L2A1393.webp',
-  '/images/1L2A1434.webp',
-  '/images/1L2A1453.webp',
-  '/images/1L2A1469.webp',
-  '/images/1L2A1643.webp',
-  '/images/1L2A1709.webp',
-];
+import { studentsImage, textData } from '../../data/homeData';
 
 export default function Home() {
   const [message, setMessage] = useState('');
@@ -191,11 +137,11 @@ export default function Home() {
         <div className='images__slide'>
           <figure className='class__image__figure'>
             <img src={skrep} alt="image" className='skrep' />
-            <BlurImage src={'/images/1L2A1501.webp'} className={'class__image'} />
+            <BlurImage src={'/images/1L2A1662.webp'} className={'class__image'} />
           </figure>
 
           <figure className='class__image__figure class__image__figure__last'>
-            <BlurImage src={'/images/1L2A1635.webp'} className={'class__image'} />
+            <BlurImage src={'/images/1L2A1697.webp'} className={'class__image'} />
           </figure>
         </div>
 
@@ -358,7 +304,13 @@ export default function Home() {
         </figure>
       </Section>
 
-      <div className='social__medias'>
+      <motion.div
+        className='social__medias'
+        initial={{ scale: 0.7, y: 30 }}
+        whileInView={{ scale: 1, y: -20 }}
+        viewport={{ once: false, amount: 0 }}
+        transition={{ duration: 0.3, animationTimingFunction: spring }}
+      >
         <NavLink to='https://t.me/hhakobyyan' className={'link__media'}>
           <TelegramSvg className='icon' />
         </NavLink>
@@ -366,7 +318,7 @@ export default function Home() {
         <NavLink to='https://www.instagram.com/nikol_hakobyan_?igsh=MTUxOHdoZzE2cGc2eg%3D%3D&utm_source=qr' className={'link__media'}>
           <InstagramSvg className='icon' />
         </NavLink>
-      </div>
+      </motion.div>
 
       <Toast
         message='Նվազագույնը 10 նիշ մուտքագրեք'
