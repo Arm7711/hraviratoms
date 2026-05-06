@@ -141,7 +141,7 @@ export default function Home() {
           </figure>
 
           <figure className='class__image__figure class__image__figure__last'>
-            <BlurImage src={'/images/1L2A1697.webp'} className={'class__image'} />
+            <BlurImage src={'/images/1L2A1709.webp'} className={'class__image'} />
           </figure>
         </div>
 
