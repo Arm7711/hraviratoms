@@ -9,7 +9,7 @@
     align-items: flex-start;
     position: relative;
 
-    .date{
+    .date {
         position: absolute;
         font-size: 30px;
         font-style: italic;
@@ -18,7 +18,7 @@
         z-index: 0;
     }
 
-    .arrow{
+    .arrow {
         position: absolute;
         bottom: calc(50% - 90px);
         left: calc(50% - 35px);
@@ -42,4 +42,26 @@
 .ScratchCard__Canvas {
     width: 100% !important;
     height: 100% !important;
+}
+
+.skeleton {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg,
+            #f0f0f0 25%,
+            #e0e0e0 50%,
+            #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.4s infinite;
+    border-radius: inherit;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: 200% 0;
+    }
+
+    100% {
+        background-position: -200% 0;
+    }
 }

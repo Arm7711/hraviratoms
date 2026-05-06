@@ -1,11 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import classNames from 'classnames';
 import Section from '../../components/Section/Section';
 import ArrowSvg from '../../components/svg/ArrowSvg';
 import lastBels from '../../assets/images/site-images/verjin-zang-1.png'
 import ScratchCard from '../../components/ScratchCard/ScratchCard';
-
 import discImg from '../../assets/images/site-images/disk.png'
 import diskLine from '../../assets/images/site-images/disk-line.png'
 import LinesSvg from '../../components/svg/LinesSvg';
@@ -23,9 +22,11 @@ import sms from '../../assets/images/site-images/sms.png'
 import wrapperImage from '../../assets/images/site-images/wrapper.png'
 import LentSvg from '../../components/svg/LentSvg';
 import studentsTitle from '../../assets/images/site-images/students.png'
-
+import messagesTitle from '../../assets/images/site-images/messages.png'
 import BlurImage from '../../components/BlureImage/BlureImage';
 import CurveSvg from '../../components/svg/CurveSvg';
+import Toast from '../../components/Toast/Toast';
+import { sendToTelegram } from '../../utils/sendToTelegram';
 
 const textData = [
   'Մեր հուշերի մեղեդին',
@@ -37,8 +38,7 @@ const textData = [
 `,
   `
     Մենք պարզապես դասարան չէինք,
-    Մենք ընտանիք էինք...`
-  ,
+    Մենք ընտանիք էինք...`,
   'մաթեմատիկայի ուսուցչուհի',
   `Ձեր ոսկեծամ խոպոպների մեջ թելերն արծաթե,
 
@@ -49,7 +49,6 @@ const textData = [
   Ձեր բարի դեմքի կնճիռների մեջ\`
 
 \n-Մենք բաժին ունենք,`,
-
   `Իսկ Դու′ք, մեր բարի, մեր լավ ուսուցիչ.
 
 Դուք բաժին ունեք մեր կյանքի գարնան
@@ -59,26 +58,21 @@ const textData = [
 լուսաբացի ծաղիկների մեջ,
 
 Մեր. գիտցածի մեջ, ունեցածի մեջ:`,
-
   `Մեր ճանապարհի ամենակարևոր ուղեկիցներից
 մեկը մեր դասղեկն էր։
 
 Տասներկու տարվա ընթացքում նա դարձավ մեր
 վստահելի ուղեցույցը և մեր պատմության
 անբաժանելի մասն ու մեր ընկերը...`,
-
   `Մեր ուսուցիչները եղել են այն մարդիկ, ովքեր մեզ
 տվել են ոչ միայն գիտելիքներ, այլ նաև
 մարդկային կարևոր արժեքներ։`,
-
   `Յուրաքանչյուր դաս դարձավ մի փոքրիկ կյանքի
 դաս, որը մեզ պատրաստեց դեպի ապագա՝
 դեպի հասուն կյանք։`,
-
   ` Մենք շնորհակալ ենք յուրաքանչյուր ուսուցչի՝
 իրենց համբերության, անսահման նվիրման և
 ոգեշնչման համար։`
-
 ];
 
 const studentsImage = [
@@ -89,9 +83,35 @@ const studentsImage = [
   '/images/1L2A1635.webp',
   '/images/1L2A1640.webp',
   '/images/1L2A1662.webp',
-]
+];
 
 export default function Home() {
+  const [message, setMessage] = useState('');
+  const [messages, setMessages] = useState([]);
+  const [status, setStatus] = useState('idle');
+  const [toastVisible, setToastVisible] = useState(false);
+
+  async function handleSend() {
+    const text = message.trim();
+
+    if (text.length < 10) {
+      setToastVisible(prev => !prev);
+      return;
+    }
+
+    setStatus('loading');
+    try {
+      await sendToTelegram(text);
+      setMessages(prev => [...prev, { text, time: new Date().toLocaleTimeString() }]);
+      setMessage('');
+      setStatus('done');
+    } catch {
+      setStatus('error');
+    } finally {
+      setTimeout(() => setStatus('idle'), 2500);
+    }
+  }
+
   return (
     <div className='site__home__page'>
       <Section title={lastBels} titleIs={true}>
@@ -114,7 +134,6 @@ export default function Home() {
 
           <figure className='disc__figure'>
             <BlurImage src={discImg} className={'disc__image'} />
-
             <img className='disc__line__image' src={diskLine} alt="disk line" />
           </figure>
 
@@ -170,7 +189,7 @@ export default function Home() {
             <BlurImage src={'/images/1L2A1501.webp'} className={'class__image'} />
           </figure>
 
-          <figure className='class__image__figure  class__image__figure__last'>
+          <figure className='class__image__figure class__image__figure__last'>
             <BlurImage src={'/images/1L2A1635.webp'} className={'class__image'} />
           </figure>
         </div>
@@ -198,7 +217,7 @@ export default function Home() {
             backgroundSize: 'contain'
           }}
         >
-
+          <BlurImage src={'/images/1L2A2146.webp'} className={'image'} />
         </figure>
 
         <div className='teacher__info'>
@@ -211,7 +230,6 @@ export default function Home() {
           <div className='teacher__wrapper'>
             <figure className='wrapper__figure__first'>
               <img className='wrapper__image__first' src={sms} alt="image" />
-
               <LentSvg />
             </figure>
 
@@ -224,9 +242,9 @@ export default function Home() {
                 backgroundSize: 'cover'
               }}
             >
-              <div className={`title title__wrapper`}>
-                <figure className={`titleFigureClassName`}>
-                  <BlurImage src={headeTeacherSms} className={`image`} />
+              <div className='title title__wrapper'>
+                <figure className='titleFigureClassName'>
+                  <BlurImage src={headeTeacherSms} className='image' />
                 </figure>
               </div>
 
@@ -246,17 +264,18 @@ export default function Home() {
       <Section className={'students__section'} titleIs={true} title={studentsTitle}>
         <div className='students__container'>
           {studentsImage.map((item, index) => (
-            <figure className={classNames('students__figure', { even: index % 2 === 0 })}>
+            <figure
+              key={index}
+              className={classNames('students__figure', { even: index % 2 === 0 })}
+            >
               <div className='image__block'>
-                <BlurImage src={item} className={`image`} duration={1.2} />
+                <BlurImage src={item} className='image' duration={1.2} />
               </div>
-
-              {studentsImage?.length - 1 !== index && <CurveSvg />}
+              {studentsImage.length - 1 !== index && <CurveSvg />}
             </figure>
           ))}
         </div>
       </Section>
-
 
       <Section
         className={'head__teacher__section'}
@@ -266,13 +285,10 @@ export default function Home() {
         titleImageClassName={'teacher__section__image'}
         titleContainerClassName={'teacher__section__container teacher__section__container__last'}
       >
-
         <div className='teacher__info'>
-
           <div className='teacher__wrapper teacher__wrapper__last'>
             <figure className='wrapper__figure__first'>
               <img className='wrapper__image__first' src={sms} alt="image" />
-
               <LentSvg />
             </figure>
 
@@ -285,9 +301,9 @@ export default function Home() {
                 backgroundSize: 'cover'
               }}
             >
-              <div className={`title title__wrapper`}>
-                <figure className={`titleFigureClassName`}>
-                  <BlurImage src={teacherLast} className={`image`} />
+              <div className='title title__wrapper'>
+                <figure className='titleFigureClassName'>
+                  <BlurImage src={teacherLast} className='image' />
                 </figure>
               </div>
 
@@ -297,10 +313,41 @@ export default function Home() {
                 <TextAnimator className='text__teacher' text={textData[10]} mode='pop' />
               </div>
             </div>
-
           </div>
         </div>
       </Section>
+
+      <Section className={'textarea__section'} title={messagesTitle} titleIs={true}>
+        <div className='textarea__container'>
+          <h1 className='title'>
+            Խնդրում ենք ներքևի դաշտում գրել ձեր մաղթանքը շրջանավարտներին
+          </h1>
+
+          <textarea
+            name="message"
+            id="message"
+            className='message__textarea'
+            value={message}
+            onChange={e => setMessage(e.target.value)}
+          />
+
+          <button
+            className='message__button'
+            onClick={handleSend}
+            disabled={status === 'loading'}
+          >
+            {status === 'loading' && 'Ուղարկվում է...'}
+            {status === 'done' && '✓ Ուղարկվեց'}
+            {status === 'error' && '✗ Սխալ'}
+            {status === 'idle' && 'Ուղարկել'}
+          </button>
+        </div>
+      </Section>
+
+      <Toast
+        message='Նվազագույնը 10 նիշ մուտքագրեք'
+        visible={toastVisible}
+      />
     </div>
-  )
+  );
 }

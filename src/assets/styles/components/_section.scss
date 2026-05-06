@@ -294,6 +294,18 @@
                 max-width: 400px;
                 height: 437px;
                 max-height: 537px;
+                padding: 20px 16px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                .image{
+                    width: 101% !important;
+                    max-width: 301px !important;
+                    height: auto !important;
+                    max-height: 104.5% !important;
+                    object-fit: cover;
+                }
             }
 
             .teacher__info {
@@ -417,7 +429,66 @@
             }
         }
 
+        &.textarea__section {
+            padding: 0 10px;
+
+            .textarea__container {
+                width: 98%;
+                max-width: 420px;
+                height: 300px;
+                border-radius: 25px;
+                background-color: #FAFAF9;
+                margin-top: 20px;
+                margin-bottom: 50px;
+                display: flex;
+                justify-content: flex-start;
+                align-items: flex-start;
+                flex-direction: column;
+                gap: 18px;
+                padding: 40px 30px;
+
+                .title {
+                    color: rgb(75, 62, 38);
+                    font-size: 14px;
+                    line-height: 18px;
+                    font-weight: 600;
+                }
+
+                .message__textarea {
+                    width: 100%;
+                    min-height: 90px;
+                    height: 90px;
+                    max-height: 100px;
+                    resize: vertical;
+                    border-radius: 12px;
+                    border: 1px solid #C4AF99;
+                    box-shadow: 0px 0px 3px 0px rgba(75, 62, 38, 0.278);
+                    padding: 20px;
+                }
+
+                .message__button {
+                    width: fit-content;
+                    min-width: 100px;
+                    height: 36px;
+                    background-color: #b2935c;
+                    color: white;
+                    border-radius: 8px;
+                    border: 1px solid transparent;
+                    cursor: pointer;
+                    padding: 0 12px;
+
+                    &:hover {
+                        background-color: white;
+                        color: #b2935c;
+                        border: 1px solid #b2935c;
+                    }
+                }
+            }
+        }
+
         &.students__section {
+            padding: 0 12px;
+
             .students__container {
                 width: 100%;
                 height: fit-content;

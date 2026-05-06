@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 
-export default function BlurImage({ src, className, alt = 'image', duration = 0.7 }) {
+export default function BlurImage({ src, className, alt = 'image', duration = 2 }) {
     return (
         <motion.img
             src={src}
@@ -9,7 +9,7 @@ export default function BlurImage({ src, className, alt = 'image', duration = 0.
             initial={{
                 opacity: 0,
                 filter: "blur(14px)",
-                scale: 1.05
+                scale: 1.1
             }}
             whileInView={{
                 opacity: 1,
