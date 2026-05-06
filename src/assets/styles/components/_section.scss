@@ -299,7 +299,7 @@
                 justify-content: center;
                 align-items: center;
 
-                .image{
+                .image {
                     width: 101% !important;
                     max-width: 301px !important;
                     height: auto !important;
@@ -484,6 +484,19 @@
                     }
                 }
             }
+
+            .like {
+                width: 100%;
+                height: fit-content;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                .icon {
+                    width: 100%;
+                    height: auto;
+                }
+            }
         }
 
         &.students__section {
@@ -501,7 +514,7 @@
 
                 .students__figure {
                     width: 100%;
-                    height: 230px;
+                    height: 300px;
                     display: flex;
                     justify-content: flex-start;
                     align-items: center;
@@ -510,7 +523,7 @@
                     .icon {
                         position: absolute;
                         z-index: 0;
-                        transform: scaleY(-1) rotate(-50deg) translateX(70px);
+                        transform: scaleY(-1) rotate(-50deg) translateX(120px) translateY(-20px);
                         right: 0;
                     }
 
@@ -523,6 +536,10 @@
                             transform: scaleY(-1) rotate(50deg) translateX(-120px);
                             left: 0;
                         }
+                    }
+
+                    &.lasts {
+                        height: 200px;
                     }
 
                     .image__block {
@@ -588,6 +605,56 @@
             display: flex;
             justify-content: flex-start;
             align-items: flex-start;
+        }
+    }
+}
+
+
+.social__medias {
+    width: fit-content;
+    padding: 15px 30px;
+    border: 1px solid #C4AF99;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    gap: 20px;
+    margin-bottom: 60px;
+    background-color: white;
+    border-radius: 35px;
+
+    .link__media {
+        width: 32px;
+        height: 32px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .icon {
+            width: 100%;
+            height: 100%;
+            fill: #C4AF99 !important;
+            transition: all 0.4s;
+
+            &:hover{
+                transform: scale(0.9);
+                opacity: 0.5;
+            }
+
+            &:active{
+                transform: scale(0.9);
+            }
+
+            g {
+                g {
+                    g {
+                        path {
+                            &:nth-child(2) {
+                                fill: #C4AF99 !important;
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }

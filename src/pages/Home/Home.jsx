@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { NavLink } from 'react-router';
 import { motion } from 'framer-motion';
 import classNames from 'classnames';
 import Section from '../../components/Section/Section';
@@ -23,10 +24,14 @@ import wrapperImage from '../../assets/images/site-images/wrapper.png'
 import LentSvg from '../../components/svg/LentSvg';
 import studentsTitle from '../../assets/images/site-images/students.png'
 import messagesTitle from '../../assets/images/site-images/messages.png'
+import HearthLine from '../../components/svg/HearthLine';
 import BlurImage from '../../components/BlureImage/BlureImage';
 import CurveSvg from '../../components/svg/CurveSvg';
 import Toast from '../../components/Toast/Toast';
 import { sendToTelegram } from '../../utils/sendToTelegram';
+
+import TelegramSvg from '../../assets/images/site-images/telegram-icon.svg?react';
+import InstagramSvg from '../../assets/images/site-images/instagram.svg?react';
 
 const textData = [
   'Մեր հուշերի մեղեդին',
@@ -39,17 +44,13 @@ const textData = [
   `
     Մենք պարզապես դասարան չէինք,
     Մենք ընտանիք էինք...`,
+
   'մաթեմատիկայի ուսուցչուհի',
-  `Ձեր ոսկեծամ խոպոպների մեջ թելերն արծաթե,
 
-որ երևում են \`
+  `Սիրելի՛ դասղեկ,
+Դուք միայն ուսուցիչ չեք, այլ նաև մեր ուղեկիցը, խորհրդատուն ու ոգեշնչման աղբյուրը։ Ձեր հոգատարությունն ու համբերությունը մեզ ուժ են տալիս առաջ գնալու, հաղթահարելու դժվարությունները և հավատալու մեր հնարավորություններին։ Դուք մեզ սովորեցրել եք ոչ միայն գիտելիք, այլ նաև մարդ լինել, գնահատել բարին ու ճիշտը։`,
 
-  \n- Մենք բաժին ունենք:
-
-  Ձեր բարի դեմքի կնճիռների մեջ\`
-
-\n-Մենք բաժին ունենք,`,
-  `Իսկ Դու′ք, մեր բարի, մեր լավ ուսուցիչ.
+  /* `Իսկ Դու′ք, մեր բարի, մեր լավ ուսուցիչ.
 
 Դուք բաժին ունեք մեր կյանքի գարնան
 ծաղիկների մեջ,
@@ -57,32 +58,36 @@ const textData = [
 Դուք բաժին ունեք մեր մանուկ սրտի վաղ
 լուսաբացի ծաղիկների մեջ,
 
-Մեր. գիտցածի մեջ, ունեցածի մեջ:`,
+Մեր. գիտցածի մեջ, ունեցածի մեջ:`, */
+
   `Մեր ճանապարհի ամենակարևոր ուղեկիցներից
 մեկը մեր դասղեկն էր։
 
 Տասներկու տարվա ընթացքում նա դարձավ մեր
 վստահելի ուղեցույցը և մեր պատմության
 անբաժանելի մասն ու մեր ընկերը...`,
+
   `Մեր ուսուցիչները եղել են այն մարդիկ, ովքեր մեզ
 տվել են ոչ միայն գիտելիքներ, այլ նաև
 մարդկային կարևոր արժեքներ։`,
+
   `Յուրաքանչյուր դաս դարձավ մի փոքրիկ կյանքի
 դաս, որը մեզ պատրաստեց դեպի ապագա՝
 դեպի հասուն կյանք։`,
+
   ` Մենք շնորհակալ ենք յուրաքանչյուր ուսուցչի՝
 իրենց համբերության, անսահման նվիրման և
 ոգեշնչման համար։`
 ];
 
 const studentsImage = [
-  '/images/1L2A1501.webp',
-  '/images/1L2A1509.webp',
-  '/images/1L2A1545.webp',
-  '/images/1L2A1583.webp',
-  '/images/1L2A1635.webp',
-  '/images/1L2A1640.webp',
-  '/images/1L2A1662.webp',
+  '/images/1L2A1365.webp',
+  '/images/1L2A1393.webp',
+  '/images/1L2A1434.webp',
+  '/images/1L2A1453.webp',
+  '/images/1L2A1469.webp',
+  '/images/1L2A1643.webp',
+  '/images/1L2A1709.webp',
 ];
 
 export default function Home() {
@@ -250,12 +255,12 @@ export default function Home() {
 
               <div className='wrapper__container'>
                 <TextAnimator className='text__teacher' text={textData[5]} mode='pop' />
-                <TextAnimator className='text__teacher' text={textData[6]} mode='pop' />
+                {/* <TextAnimator className='text__teacher' text={textData[6]} mode='pop' /> */}
               </div>
             </div>
 
             <div className='text__desc'>
-              <TextAnimator className='desc' text={textData[7]} />
+              <TextAnimator className='desc' text={textData[6]} />
             </div>
           </div>
         </div>
@@ -266,7 +271,12 @@ export default function Home() {
           {studentsImage.map((item, index) => (
             <figure
               key={index}
-              className={classNames('students__figure', { even: index % 2 === 0 })}
+              className={classNames('students__figure',
+                {
+                  even: index % 2 === 0,
+                  lasts: studentsImage.length - 1 === index || studentsImage.length - 2 === index
+                }
+              )}
             >
               <div className='image__block'>
                 <BlurImage src={item} className='image' duration={1.2} />
@@ -308,9 +318,9 @@ export default function Home() {
               </div>
 
               <div className='wrapper__container'>
+                <TextAnimator className='text__teacher' text={textData[7]} mode='pop' />
                 <TextAnimator className='text__teacher' text={textData[8]} mode='pop' />
                 <TextAnimator className='text__teacher' text={textData[9]} mode='pop' />
-                <TextAnimator className='text__teacher' text={textData[10]} mode='pop' />
               </div>
             </div>
           </div>
@@ -342,7 +352,21 @@ export default function Home() {
             {status === 'idle' && 'Ուղարկել'}
           </button>
         </div>
+
+        <figure className='like'>
+          <HearthLine />
+        </figure>
       </Section>
+
+      <div className='social__medias'>
+        <NavLink to='https://t.me/hhakobyyan' className={'link__media'}>
+          <TelegramSvg className='icon' />
+        </NavLink>
+
+        <NavLink to='https://www.instagram.com/nikol_hakobyan_?igsh=MTUxOHdoZzE2cGc2eg%3D%3D&utm_source=qr' className={'link__media'}>
+          <InstagramSvg className='icon' />
+        </NavLink>
+      </div>
 
       <Toast
         message='Նվազագույնը 10 նիշ մուտքագրեք'
