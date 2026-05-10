@@ -30,6 +30,7 @@ export default function BlurImage({ src, className, alt = 'image', duration = 2 
                 display: "block",
                 willChange: "transform, filter, opacity"
             }}
+            draggable='false'
         />
     );
 }
