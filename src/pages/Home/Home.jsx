@@ -141,7 +141,7 @@ export default function Home() {
           </figure>
 
           <figure className='class__image__figure class__image__figure__last'>
-            <BlurImage src={'/images/1L2A1697.webp'} className={'class__image'} />
+            <BlurImage src={'/images/1L2A1681.webp'} className={'class__image'} />
           </figure>
         </div>
 
@@ -225,6 +225,8 @@ export default function Home() {
                     || studentsImage.length - 4 === index
                     || studentsImage.length - 5 === index
                     || studentsImage.length - 6 === index
+                    || studentsImage.length - 7 === index
+                    || studentsImage.length - 8 === index
                 }
               )}
             >
